@@ -6,13 +6,15 @@ const routes = require('./routes');
 const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-const port = process.env.port || 3000
+const port = process.env.PORT || 3000
 
 
 // DB connection
 
 async function main() {
-    const connectDB = await mongoose.connect('mongodb+srv://kayserbouc:BOUCbouc01@boucdb.kr4kndq.mongodb.net/boucDB');
+    const dbClusterUrl = process.env.DB_URL
+    console.log('process.env.DB_URL', process.env.DB_URL);
+    const connectDB = await mongoose.connect(dbClusterUrl);
     connectDB && console.log('DB Connected Succesfully!');
 }
 
